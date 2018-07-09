@@ -43,5 +43,5 @@ sudo service jenkins restart
 ########################
 # Saving Jenkins Initial Pass
 ########################
-sudo cat /var/lib/jenkins/secrets/initialAdminPassword > /vagrant/JenkinsPass.txt
+sudo cp /var/lib/jenkins/secrets/initialAdminPassword /vagrant/JenkinsPass.txt
 echo "Success"
