@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
     
       box.vm.provision :shell,
           :path => "provision-env.sh",
-          :args => "master", 
+          :args => "slave", 
           :preserve_order => true,
           :run => "always"
   end
@@ -42,7 +42,7 @@ Vagrant.configure("2") do |config|
     
       box.vm.provision :shell,
           :path => "provision-env.sh",
-          :args => "master", 
+          :args => "slave", 
           :preserve_order => true,
           :run => "always"
   end
@@ -55,7 +55,7 @@ Vagrant.configure("2") do |config|
     
       box.vm.provision :shell,
           :path => "provision-env.sh",
-          :args => "master", 
+          :args => "slave", 
           :preserve_order => true,
           :run => "always"
       end
