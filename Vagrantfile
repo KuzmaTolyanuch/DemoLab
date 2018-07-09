@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
       box.vm.hostname = "jenkins"
       box.vm.box = "ubuntu/xenial64"
       box.vm.network "public_network", ip: "192.168.100.10"
-      box.vm.synced_folder ".", "/mnt/host_machine"
+      box.vm.synced_folder ".", "/vagrant"
     
       box.vm.provision :shell,
           :path => "provision-jenkins.sh",
@@ -25,7 +25,7 @@ Vagrant.configure("2") do |config|
       box.vm.hostname = "devenv"
       box.vm.box = "ubuntu/xenial64"
       box.vm.network "public_network", ip: "192.168.100.11"
-      box.vm.synced_folder "/vagrant/dev", "/mnt/host_machine"
+      box.vm.synced_folder ".", "/vagrant"
     
       box.vm.provision :shell,
           :path => "provision-env.sh",
@@ -38,7 +38,7 @@ Vagrant.configure("2") do |config|
       box.vm.hostname = "stageenv"
       box.vm.box = "ubuntu/xenial64"
       box.vm.network "public_network", ip: "192.168.100.12"
-      box.vm.synced_folder "/vagrant/stage", "/mnt/host_machine"
+      box.vm.synced_folder ".", "/vagrant"
     
       box.vm.provision :shell,
           :path => "provision-env.sh",
@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
       box.vm.hostname = "qaenv"
       box.vm.box = "ubuntu/xenial64"
       box.vm.network "public_network", ip: "192.168.100.13"
-      box.vm.synced_folder "/vagrant/qa", "/mnt/host_machine"
+      box.vm.synced_folder ".", "/vagrant"
     
       box.vm.provision :shell,
           :path => "provision-env.sh",
