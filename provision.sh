@@ -39,4 +39,9 @@ sudo cp /vagrant/VirtualHost/jenkins /etc/nginx/sites-available/
 sudo ln -s /etc/nginx/sites-available/jenkins /etc/nginx/sites-enabled/
 sudo service nginx restart
 sudo service jenkins restart
+
+########################
+# Saving Jenkins Initial Pass
+########################
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword > /vagrant/JenkinsPass.txt
 echo "Success"
