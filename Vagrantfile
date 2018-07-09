@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
       box.vm.synced_folder "/dev", "/mnt/host_machine"
     
       box.vm.provision :shell,
-          :path => "provision-dev.sh",
+          :path => "provision-env.sh",
           :args => "master", 
           :preserve_order => true,
           :run => "always"
@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
       box.vm.synced_folder "/stage", "/mnt/host_machine"
     
       box.vm.provision :shell,
-          :path => "provision-stage.sh",
+          :path => "provision-env.sh",
           :args => "master", 
           :preserve_order => true,
           :run => "always"
@@ -54,7 +54,7 @@ Vagrant.configure("2") do |config|
       box.vm.synced_folder "/qa", "/mnt/host_machine"
     
       box.vm.provision :shell,
-          :path => "provision-qa.sh",
+          :path => "provision-env.sh",
           :args => "master", 
           :preserve_order => true,
           :run => "always"
