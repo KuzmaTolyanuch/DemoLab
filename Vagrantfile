@@ -2,47 +2,60 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/xenial64"
-  config.vm.network "public_network", ip: "192.168.100.10"
-  config.vm.synced_folder ".", "/mnt/host_machine"
-  config.vm.provider :virtualbox do |vb|
-      vb.name = "jenkins"
-      vb.memory = "2048"
-  end
-  config.vm.provision "shell" do |s|
-    s.path = "provision-jenkins.sh"
+
+  config.vm.provider :virtualbox do |box|
+      box.linked_clone = true
+      box.customize [ "modifyvm", :id, "--memory", "1024", "--cpus", "1" ]
   end
   
-  config.vm.box = "ubuntu/xenial64"
-  config.vm.network "public_network", ip: "192.168.100.11"
-  config.vm.synced_folder ".", "/mnt/host_machine"
-  config.vm.provider :virtualbox do |vb|
-      vb.name = "DevEnv"
-      vb.memory = "2048"
-  end
-  config.vm.provision "shell" do |s|
-    s.path = "provision-dev.sh"
-  end
-  
-    config.vm.box = "ubuntu/xenial64"
-  config.vm.network "public_network", ip: "192.168.100.12"
-  config.vm.synced_folder ".", "/mnt/host_machine"
-  config.vm.provider :virtualbox do |vb|
-      vb.name = "StageEnv"
-      vb.memory = "2048"
-  end
-  config.vm.provision "shell" do |s|
-    s.path = "provision-stage.sh"
+  config.vm.define :jenkins do |box|
+      box.vm.hostname = "jenkins"
+      box.vm.box = "ubuntu/xenial64"
+      box.vm.network "public_network", ip: "192.168.100.10"
+      box.vm.synced_folder ".", "/mnt/host_machine"
+    
+      box.vm.provision :shell,
+          :path = "provision-jenkins.sh",
+          :args => "master", 
+          :preserve_order => true,
+          :run => "always"
   end
   
-     config.vm.box = "ubuntu/xenial64"
-  config.vm.network "public_network", ip: "192.168.100.13"
-  config.vm.synced_folder ".", "/mnt/host_machine"
-  config.vm.provider :virtualbox do |vb|
-      vb.name = "QAEnv"
-      vb.memory = "2048"
+    config.vm.define :devenv do |box|
+      box.vm.hostname = "devenv"
+      box.vm.box = "ubuntu/xenial64"
+      box.vm.network "public_network", ip: "192.168.100.11"
+      box.vm.synced_folder "/dev", "/mnt/host_machine"
+    
+      box.vm.provision :shell,
+          :path = "provision-dev.sh",
+          :args => "master", 
+          :preserve_order => true,
+          :run => "always"
   end
-  config.vm.provision "shell" do |s|
-    s.path = "provision-qa.sh"
-  end 
-end
+  
+      config.vm.define :stageenv do |box|
+      box.vm.hostname = "stageenv"
+      box.vm.box = "ubuntu/xenial64"
+      box.vm.network "public_network", ip: "192.168.100.12"
+      box.vm.synced_folder "/stage", "/mnt/host_machine"
+    
+      box.vm.provision :shell,
+          :path = "provision-stage.sh",
+          :args => "master", 
+          :preserve_order => true,
+          :run => "always"
+  end
+  
+      config.vm.define :qaenv do |box|
+      box.vm.hostname = "qaenv"
+      box.vm.box = "ubuntu/xenial64"
+      box.vm.network "public_network", ip: "192.168.100.13"
+      box.vm.synced_folder "/qa", "/mnt/host_machine"
+    
+      box.vm.provision :shell,
+          :path = "provision-qa.sh",
+          :args => "master", 
+          :preserve_order => true,
+          :run => "always"
+  end
