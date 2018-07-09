@@ -58,4 +58,5 @@ Vagrant.configure("2") do |config|
           :args => "master", 
           :preserve_order => true,
           :run => "always"
-  end
+      end
+end
