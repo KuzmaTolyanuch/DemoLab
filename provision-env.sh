@@ -1,13 +1,6 @@
 #!/bin/bash
 
 ########################
-# Java
-########################
-echo "Installing Java"
-sudo apt-get update > /dev/null 2>&1
-sudo apt-get -y install default-jdk jenkins > /dev/null 2>&1
-
-########################
 # Docker
 ########################
 echo "Installing Docker"
