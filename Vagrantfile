@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
       box.vm.synced_folder ".", "/vagrant"
     
       box.vm.provision :shell,
-          :path => "provision-jenkins.sh",
+          :path => "provision-master.sh",
           :args => "master", 
           :preserve_order => true,
           :run => "always"
