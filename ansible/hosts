@@ -1,0 +1,5 @@
+[hosts]
+master ansible_ssh_host=192.168.100.10
+dev    ansible_ssh_host=192.168.100.11
+stage  ansible_ssh_host=192.168.100.12
+qa     ansible_ssh_host=192.168.100.13
