@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script will install Jenkins, Java, Maven, Docker.
+# This script will install Jenkins, Java, Docker, Maven.
 
 #################################
 # Jenkins & Java setup
@@ -89,5 +89,17 @@ echo maven installed to ${install_dir}
 mvn --version
 
 printf "\n\nTo get mvn in your path, open a new shell or execute: source /etc/profile.d/maven.sh\n"
+
+########################
+# Ansible
+########################
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt-get update -y
+sudo apt-get install -y ansible
+# copy ansible hosts
+sudo cp /vagrant/ansible/hosts /etc/ansible/
+sudo mkdir /etc/ansible/group_vars
+# copy group vars
+sudo cp /etc/ansible/servers /etc/ansible/group_vars/
 
 echo "Success"
