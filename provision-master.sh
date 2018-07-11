@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script will install Jenkins, Java, Maven, Docker, Git, and Asible.
+# This script will install Jenkins, Java, Maven, Docker.
 
 #################################
 # Jenkins & Java setup
@@ -49,6 +49,12 @@ sudo service jenkins restart
 #################################
 sudo cp /var/lib/jenkins/secrets/initialAdminPassword /vagrant/JenkinsPass.txt
 echo "Jenkins install complete, Initial Password is in a local project directory"
+
+#################################
+# Git
+#################################
+sudo apt-get install git
+echo "Success"
 
 #################################
 # Maven install
